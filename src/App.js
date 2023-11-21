@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import TextField from "@mui/material/TextField";
+import { Controller } from "react-hook-form";
+import { usePersonForm } from "./hooks/usePersonForm";
+import { Box } from "@mui/material";
 
 function App() {
+  const { onSubmitHandler, useFormApi } = usePersonForm();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box marginLeft="50%" marginTop="50%">
+      <form onSubmit={onSubmitHandler}>
+        <Controller
+          control={useFormApi.control}
+          name="name"
+          render={({
+            field: { onChange, onBlur, value, ref },
+            fieldState: { invalid, isTouched, isDirty, error },
+          }) => (
+            <TextField
+              onChange={onChange}
+              onBlur={onBlur}
+              selected={value}
+              error={error}
+              helperText={error?.message}
+              label="Name"
+              variant="outlined"
+            />
+          )}
+        />
+        {/* <input type="submit" /> */}
+      </form>
+    </Box>
   );
 }
 
