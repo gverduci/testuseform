@@ -28,6 +28,8 @@ const Contacts = () => {
                 helperText={error?.message}
                 label="Phone"
                 variant="outlined"
+                inputProps={{ "aria-invalid": error ? "true" : "false" }}
+                FormHelperTextProps={{ "role": error ? "alert" : "" }}
               />
             )}
           />
@@ -48,6 +50,8 @@ const Contacts = () => {
                 helperText={error?.message}
                 label="Address"
                 variant="outlined"
+                inputProps={{ "aria-invalid": error ? "true" : "false" }}
+                FormHelperTextProps={{ "role": error ? "alert" : "" }}
               />
             )}
           />
@@ -68,6 +72,8 @@ const Contacts = () => {
                 helperText={error?.message}
                 label="City"
                 variant="outlined"
+                inputProps={{ "aria-invalid": error ? "true" : "false" }}
+                FormHelperTextProps={{ "role": error ? "alert" : "" }}
               />
             )}
           />
@@ -88,6 +94,8 @@ const Contacts = () => {
                 helperText={error?.message}
                 label="State"
                 variant="outlined"
+                inputProps={{ "aria-invalid": error ? "true" : "false" }}
+                FormHelperTextProps={{ "role": error ? "alert" : "" }}
               />
             )}
           />
@@ -108,6 +116,8 @@ const Contacts = () => {
                 helperText={error?.message}
                 label="Zip"
                 variant="outlined"
+                inputProps={{ "aria-invalid": error ? "true" : "false" }}
+                FormHelperTextProps={{ "role": error ? "alert" : "" }}
               />
             )}
           />
@@ -128,6 +138,8 @@ const Contacts = () => {
                 helperText={error?.message}
                 label="Country"
                 variant="outlined"
+                inputProps={{ "aria-invalid": error ? "true" : "false" }}
+                FormHelperTextProps={{ "role": error ? "alert" : "" }}
               />
             )}
           />
@@ -148,6 +160,8 @@ const Contacts = () => {
                 helperText={error?.message}
                 label="Website"
                 variant="outlined"
+                inputProps={{ "aria-invalid": error ? "true" : "false" }}
+                FormHelperTextProps={{ "role": error ? "alert" : "" }}
               />
             )}
           />

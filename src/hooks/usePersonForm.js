@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useFormUpdater } from "./useFormUpdater";
 import { usePersonUpdater } from "./usePersonUpdater";
@@ -8,22 +8,40 @@ import { assignContact } from "../store/contactSlice";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-const personSchema = yup
-  .object({
-    name: yup.string().required(),
+const personSchema = yup.object(
+  {
+    surname: yup.string().required(),
     // add email with regex
-    email: yup.string().matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, "Email is not valid").required(),
+    email: yup
+      .string()
+      .matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, "Email is not valid")
+      .required(),
     // add phone with regex, permit digits, dashes, spaces, parentheses and plus
     phone: yup.string().matches(/^[0-9-()+ ]+$/, "Phone number is not valid"),
     // add website check with url regex
     website: yup.string().url("Website is not valid"),
-  })
-  .required();
-
+  }
+).shape(
+  {
+    name: yup.string().notRequired(),
+    secondaryName: yup
+      .string()
+      .when(["name", "secondaryName"], {
+        is: (name, secondaryName) => !name && !!secondaryName,
+        then: (schema) => schema.length(0, "use name before secondaryName"),
+      })
+      .when(["name", "secondaryName"], ([name, secondaryName], schema) =>
+       !!name && !!secondaryName && name.trim() === secondaryName.trim() ? schema.length(0, "secondaryName must be different from name") : schema,
+    ),
+  },
+  [["secondaryName", "secondaryName"]]
+);
 export function usePersonForm() {
   const dispatch = useDispatch();
 
-  const person = useSelector((state) => state.person || { name: "", email: "" });
+  const person = useSelector(
+    (state) => state.person || { name: "", email: "" }
+  );
 
   const PersonAction = useCallback(
     (data) => {
@@ -38,11 +56,15 @@ export function usePersonForm() {
   const useFormApi = useForm({
     defaultValues: person,
     mode: "onChange",
-    delayError: 1000,
+    delayError: 500,
     resolver: yupResolver(personSchema),
   });
 
-  const { handleSubmit } = useFormApi;
+  const { handleSubmit, trigger } = useFormApi;
+
+  useEffect(() => {
+    trigger();
+ }, [trigger]);
 
   /* Data source updaters */
   // update the FORM => WHY? change comes from "book" prop

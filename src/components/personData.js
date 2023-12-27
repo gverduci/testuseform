@@ -20,13 +20,40 @@ const PersonData = () => {
               fieldState: { invalid, isTouched, isDirty, error },
             }) => (
               <TextField
-                onChange={onChange}
+                onChange={(evt) => {
+                  onChange(evt);
+                  useFormApi.trigger("secondaryName");
+                }}
                 onBlur={onBlur}
                 selected={value}
                 error={error}
                 helperText={error?.message}
                 label="Name"
                 variant="outlined"
+                inputProps={{ "aria-invalid": error ? "true" : "false" }}
+                FormHelperTextProps={{ "role": error ? "alert" : "" }}
+              />
+            )}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <Controller
+            control={useFormApi.control}
+            name="secondaryName"
+            render={({
+              field: { onChange, onBlur, value, ref },
+              fieldState: { invalid, isTouched, isDirty, error },
+            }) => (
+              <TextField
+                onChange={onChange}
+                onBlur={onBlur}
+                selected={value}
+                error={error}
+                helperText={error?.message}
+                label="secondaryName"
+                variant="outlined"
+                inputProps={{ "aria-invalid": error ? "true" : "false" }}
+                FormHelperTextProps={{ "role": error ? "alert" : "" }}
               />
             )}
           />
@@ -47,6 +74,8 @@ const PersonData = () => {
                 helperText={error?.message}
                 label="Surname"
                 variant="outlined"
+                inputProps={{ "aria-invalid": error ? "true" : "false" }}
+                FormHelperTextProps={{ "role": error ? "alert" : "" }}
               />
             )}
           />
@@ -67,6 +96,8 @@ const PersonData = () => {
                 helperText={error?.message}
                 label="Email"
                 variant="outlined"
+                inputProps={{ "aria-invalid": error ? "true" : "false" }}
+                FormHelperTextProps={{ "role": error ? "alert" : "" }}
               />
             )}
           />
@@ -87,6 +118,8 @@ const PersonData = () => {
                 helperText={error?.message}
                 label="Title"
                 variant="outlined"
+                inputProps={{ "aria-invalid": error ? "true" : "false" }}
+                FormHelperTextProps={{ "role": error ? "alert" : "" }}
               />
             )}
           />

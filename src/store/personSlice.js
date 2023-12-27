@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 export const personInitialState = {
   name: '',
+  secondaryName: '',
   surname: '',
   email: '',
   title: '',
@@ -15,6 +16,7 @@ export const personSlice = createSlice({
   reducers: {
     assignPerson: (state, action) => {
       state.name = action.payload.name;
+      state.secondaryName = action.payload.secondaryName;
       state.surname = action.payload.surname;
       state.email = action.payload.email;
       state.title = action.payload.title;
