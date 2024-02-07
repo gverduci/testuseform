@@ -1,14 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { Person } from '../models/person';
 
-export const personInitialState = {
-  name: '',
-  secondaryName: '',
-  surname: '',
-  email: '',
-  title: '',
-  notes: '',
-  birthday: '',
-}
+export const personInitialState = Person.initialState;
 
 export const personSlice = createSlice({
   name: 'person',

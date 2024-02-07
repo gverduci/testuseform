@@ -11,7 +11,7 @@ const Contacts = () => {
 
   return (
     <div>
-      <Grid container spacing={2} style={{ marginTop: '8px' }}>
+      <Grid container spacing={2} style={{ marginTop: "8px" }}>
         <Grid item xs={6}>
           <Controller
             control={useFormApi.control}
@@ -29,7 +29,7 @@ const Contacts = () => {
                 label="Phone"
                 variant="outlined"
                 inputProps={{ "aria-invalid": error ? "true" : "false" }}
-                FormHelperTextProps={{ "role": error ? "alert" : "" }}
+                FormHelperTextProps={{ role: error ? "alert" : "" }}
               />
             )}
           />
@@ -51,7 +51,7 @@ const Contacts = () => {
                 label="Address"
                 variant="outlined"
                 inputProps={{ "aria-invalid": error ? "true" : "false" }}
-                FormHelperTextProps={{ "role": error ? "alert" : "" }}
+                FormHelperTextProps={{ role: error ? "alert" : "" }}
               />
             )}
           />
@@ -73,7 +73,7 @@ const Contacts = () => {
                 label="City"
                 variant="outlined"
                 inputProps={{ "aria-invalid": error ? "true" : "false" }}
-                FormHelperTextProps={{ "role": error ? "alert" : "" }}
+                FormHelperTextProps={{ role: error ? "alert" : "" }}
               />
             )}
           />
@@ -95,7 +95,7 @@ const Contacts = () => {
                 label="State"
                 variant="outlined"
                 inputProps={{ "aria-invalid": error ? "true" : "false" }}
-                FormHelperTextProps={{ "role": error ? "alert" : "" }}
+                FormHelperTextProps={{ role: error ? "alert" : "" }}
               />
             )}
           />
@@ -103,9 +103,10 @@ const Contacts = () => {
         <Grid item xs={6}>
           <Controller
             control={useFormApi.control}
+            disabled={!useFormApi.watch("state")}
             name="zip"
             render={({
-              field: { onChange, onBlur, value, ref },
+              field: { onChange, onBlur, value, disabled, ref },
               fieldState: { invalid, isTouched, isDirty, error },
             }) => (
               <TextField
@@ -117,7 +118,8 @@ const Contacts = () => {
                 label="Zip"
                 variant="outlined"
                 inputProps={{ "aria-invalid": error ? "true" : "false" }}
-                FormHelperTextProps={{ "role": error ? "alert" : "" }}
+                FormHelperTextProps={{ role: error ? "alert" : "" }}
+                disabled={disabled}
               />
             )}
           />
@@ -139,7 +141,7 @@ const Contacts = () => {
                 label="Country"
                 variant="outlined"
                 inputProps={{ "aria-invalid": error ? "true" : "false" }}
-                FormHelperTextProps={{ "role": error ? "alert" : "" }}
+                FormHelperTextProps={{ role: error ? "alert" : "" }}
               />
             )}
           />
@@ -161,7 +163,7 @@ const Contacts = () => {
                 label="Website"
                 variant="outlined"
                 inputProps={{ "aria-invalid": error ? "true" : "false" }}
-                FormHelperTextProps={{ "role": error ? "alert" : "" }}
+                FormHelperTextProps={{ role: error ? "alert" : "" }}
               />
             )}
           />
