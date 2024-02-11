@@ -3,10 +3,11 @@ import { usePersonForm } from "./hooks/usePersonForm";
 import { AppBar, Box, Icon, IconButton, Toolbar, Typography } from "@mui/material";
 import Contacts from "./components/contacts";
 import PersonData from "./components/personData";
+import { addPersons, delPersons } from "./db";
 
 function App() {
   const { onSubmitHandler, useFormApi } = usePersonForm();
-  const handleOnClick = (evt) => {
+  const handleOnDownload = (evt) => {
     // Download the serialized Person object
     const person = useFormApi.getValues();
     const blob = new Blob([JSON.stringify(person)], { type: 'application/json' });
@@ -19,13 +20,28 @@ function App() {
 
   };
 
+  
+    const handleOnSave = (evt) => {
+      // Download the serialized Person object
+      const person = useFormApi.getValues();
+      addPersons([person]);
+    };
+
+    const handleOnDelete = (evt) => {
+      // Download the serialized Person object
+      const person = useFormApi.getValues();
+      delPersons([person]);
+    };
+
   return (
     <>
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6">Person Form</Typography>
         <Box sx={{ flexGrow: 1 }} />
-        <IconButton color="inherit" onClick={(evt) => handleOnClick(evt)}><Icon>download</Icon></IconButton>
+        <IconButton color="inherit" onClick={(evt) => handleOnDownload(evt)}><Icon>download</Icon></IconButton>
+        <IconButton color="inherit" onClick={(evt) => handleOnSave(evt)}><Icon>save</Icon></IconButton>
+        <IconButton color="inherit" onClick={(evt) => handleOnDelete(evt)}><Icon>delete</Icon></IconButton>
       </Toolbar>
     </AppBar>
 
