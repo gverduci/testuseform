@@ -73,6 +73,7 @@ describe('Person', () => {
   });
 
   test('should serialize the data into a JSON object', () => {
+    jest.spyOn(person, "serialize")
     const serializedData = person.serialize();
     expect(serializedData).toEqual({
       name: 'John',
@@ -83,6 +84,7 @@ describe('Person', () => {
       notes: 'Some notes',
       birthday: '1990-01-01',
     });
+    expect(person.serialize).toHaveBeenCalledTimes(1);
   });
 
   test('should deserialize the data from a JSON object', () => {
